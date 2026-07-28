@@ -1,0 +1,17 @@
+model: brainiall-tts-pt-br
+model_type: tts
+model_properties:
+  default_voice: pf_dora
+  voices:
+    - mode: pf_dora
+      name: Dora
+      language: [pt-BR]
+    - mode: pm_alex
+      name: Alex
+      language: [pt-BR]
+    - mode: pm_santa
+      name: Santa
+      language: [pt-BR]
+  word_limit: 4000
+  audio_type: wav
+  max_workers: 1

@@ -1,0 +1,33 @@
+{
+  "name": "youtube-subtitles-srt-quality-gate",
+  "version": 1,
+  "purpose": "Provider-neutral checks before a human publishes an SRT file to YouTube, TikTok or another video platform.",
+  "input": "subtitleSegments",
+  "checks": [
+    {
+      "id": "valid-time-order",
+      "rule": "startMs >= 0 AND endMs > startMs AND startMs >= previous.endMs",
+      "failure": "Reject overlapping or backwards subtitle intervals."
+    },
+    {
+      "id": "non-empty-text",
+      "rule": "trim(text) != ''",
+      "failure": "Reject empty caption cues."
+    },
+    {
+      "id": "utf8-text",
+      "rule": "text is valid UTF-8 and contains no NUL",
+      "failure": "Reject malformed export bytes."
+    },
+    {
+      "id": "human-review",
+      "rule": "reviewerAccepted == true",
+      "failure": "Keep the file in draft; the template never publishes on the user's behalf."
+    }
+  ],
+  "output": {
+    "pass": "ready_for_manual_upload",
+    "fail": "needs_review",
+    "telemetry": "Record only aggregate pass/fail counts; do not log audio or caption text."
+  }
+}

@@ -82,6 +82,17 @@ binary audio. It is a community example only: it is not an n8n partnership, it e
 credential, and it does not claim that the template is production-ready for every n8n
 version.
 
+## YouTube subtitle workflow templates
+
+The [`examples/transcription/youtube-subtitles-srt-request.json`](examples/transcription/youtube-subtitles-srt-request.json)
+recipe is a provider-neutral HTTP step for Dify or n8n: it keeps the API key in a
+runtime secret, sends caller-owned audio to the fixed BRAINIALL origin, and exposes
+the transcript and word timestamps needed to render SRT. It does not upload or publish
+to YouTube. Pair it with the
+[`youtube-subtitles-srt-quality-gate.json`](examples/transcription/youtube-subtitles-srt-quality-gate.json)
+checks before a human performs the final platform upload. A no-code browser path is
+available at [Preparar SRT para YouTube Studio](https://www.brainiall.com/transcreve/tools/youtube-subtitles-srt).
+
 Support: [support@brainiall.com](mailto:support@brainiall.com)
 
 ## Current limitations

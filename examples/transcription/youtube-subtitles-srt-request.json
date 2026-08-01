@@ -1,0 +1,33 @@
+{
+  "name": "youtube-subtitles-srt-request",
+  "version": 1,
+  "purpose": "Portable HTTP recipe for a Dify or n8n workflow that turns caller-owned audio into subtitle-ready transcript data.",
+  "security": {
+    "apiKey": "runtime-secret: BRAINIALL_API_KEY",
+    "neverCommitSecrets": true,
+    "followRedirects": false,
+    "retryBillableRequest": false
+  },
+  "request": {
+    "method": "POST",
+    "url": "https://api.brainiall.com/v1/whisper/transcribe",
+    "headers": {
+      "Authorization": "Bearer ${BRAINIALL_API_KEY}"
+    },
+    "multipart": {
+      "audio": "input.audio",
+      "language": "pt",
+      "diarize": true
+    }
+  },
+  "responseMapping": {
+    "transcriptText": "$.text",
+    "wordTimestamps": "$.words",
+    "speakerLabels": "$.words[*].speaker"
+  },
+  "nextStep": "Render the caller-owned transcript as SRT, review timing and speaker labels, then upload it in the destination platform.",
+  "limits": {
+    "maxAudioBytes": 26214400,
+    "language": "pt-BR"
+  }
+}

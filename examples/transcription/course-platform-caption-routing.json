@@ -1,0 +1,23 @@
+{
+  "name": "course-platform-caption-routing",
+  "version": 1,
+  "purpose": "Provider-neutral routing metadata for course creators preparing caller-owned subtitles for Thinkific, Teachable, Podia, or Kajabi.",
+  "security": {
+    "callerOwnsMedia": true,
+    "neverCommitSecrets": true,
+    "noPlatformLogin": true,
+    "noAutomaticPublish": true
+  },
+  "input": {
+    "subtitleFile": "caller-owned SRT or VTT",
+    "destination": "thinkific | teachable | podia | kajabi",
+    "locale": "pt-BR"
+  },
+  "routing": {
+    "thinkific": {"acceptedFormats": ["SRT"], "finalStep": "Human uploads the reviewed caption file in the course Video Library."},
+    "teachable": {"acceptedFormats": ["SRT", "VTT"], "finalStep": "Human uploads the reviewed subtitle file to the course video."},
+    "podia": {"acceptedFormats": ["VTT"], "finalStep": "Human uploads one reviewed VTT per language to the video."},
+    "kajabi": {"acceptedFormats": ["SRT"], "finalStep": "Human reviews or downloads the subtitle file in the destination video workflow."}
+  },
+  "nextStep": "Run the quality gate, retain the original, and let the account owner perform the final platform action."
+}

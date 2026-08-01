@@ -99,6 +99,12 @@ platform-specific human upload step. Pair it with
 [`vimeo-wistia-caption-quality-gate.json`](examples/transcription/vimeo-wistia-caption-quality-gate.json).
 These examples do not log in, publish, or claim an affiliation with Vimeo or Wistia.
 
+For course creators, [`course-platform-caption-routing.json`](examples/transcription/course-platform-caption-routing.json)
+maps the documented SRT/VTT handoff for Thinkific, Teachable, Podia, and Kajabi. Pair it
+with [`course-platform-caption-quality-gate.json`](examples/transcription/course-platform-caption-quality-gate.json).
+The examples remain caller-owned and do not log in, publish, or claim an affiliation with
+any course platform.
+
 Support: [support@brainiall.com](mailto:support@brainiall.com)
 
 ## Current limitations

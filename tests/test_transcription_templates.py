@@ -42,3 +42,19 @@ def test_vimeo_wistia_quality_gate_has_platform_and_human_checks() -> None:
     check_ids = {check["id"] for check in template["checks"]}
     assert {"platform-format", "valid-time-order", "utf8-text", "human-review"} <= check_ids
     assert "never logs in" in template["checks"][-1]["failure"]
+
+
+def test_course_platform_routing_preserves_format_differences() -> None:
+    template = load_template("course-platform-caption-routing.json")
+    assert template["security"]["callerOwnsMedia"] is True
+    assert template["security"]["noPlatformLogin"] is True
+    assert set(template["routing"]) == {"thinkific", "teachable", "podia", "kajabi"}
+    assert template["routing"]["podia"]["acceptedFormats"] == ["VTT"]
+    assert template["routing"]["teachable"]["acceptedFormats"] == ["SRT", "VTT"]
+
+
+def test_course_platform_quality_gate_requires_destination_mapping() -> None:
+    template = load_template("course-platform-caption-quality-gate.json")
+    check_ids = {check["id"] for check in template["checks"]}
+    assert {"destination-format", "valid-time-order", "human-review"} <= check_ids
+    assert "never logs in" in template["checks"][-1]["failure"]

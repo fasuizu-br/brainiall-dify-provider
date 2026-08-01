@@ -1,0 +1,14 @@
+{
+  "name": "course-platform-caption-quality-gate",
+  "version": 1,
+  "purpose": "Shared preflight checks for SRT/VTT files used in course platforms.",
+  "input": "subtitleSegments",
+  "checks": [
+    {"id":"valid-time-order","rule":"startMs >= 0 AND endMs > startMs AND startMs >= previous.endMs","failure":"Reject overlapping or backwards subtitle intervals."},
+    {"id":"non-empty-text","rule":"trim(text) != ''","failure":"Reject empty caption cues."},
+    {"id":"utf8-text","rule":"text is valid UTF-8 and contains no NUL","failure":"Reject malformed export bytes."},
+    {"id":"destination-format","rule":"destinationFormatMap[destination] contains format","failure":"Reject a format the selected course platform does not document."},
+    {"id":"human-review","rule":"reviewerAccepted == true","failure":"Keep the file in draft; this template never logs in or publishes."}
+  ],
+  "output": {"pass":"ready_for_manual_course_platform_upload","fail":"needs_review","telemetry":"Record aggregate pass/fail counts only; do not log media or caption text."}
+}

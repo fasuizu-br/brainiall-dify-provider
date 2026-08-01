@@ -27,3 +27,18 @@ def test_quality_gate_requires_manual_review_and_no_publish() -> None:
     assert {"valid-time-order", "non-empty-text", "utf8-text", "human-review"} <= check_ids
     assert template["checks"][-1]["rule"] == "reviewerAccepted == true"
     assert "manual" in template["output"]["pass"]
+
+
+def test_vimeo_wistia_routing_is_caller_owned_and_platform_explicit() -> None:
+    template = load_template("vimeo-wistia-caption-routing.json")
+    assert template["security"]["callerOwnsMedia"] is True
+    assert template["security"]["noPlatformLogin"] is True
+    assert set(template["routing"]) == {"vimeo", "wistia"}
+    assert template["routing"]["vimeo"]["acceptedFormats"] == ["SRT", "WebVTT"]
+
+
+def test_vimeo_wistia_quality_gate_has_platform_and_human_checks() -> None:
+    template = load_template("vimeo-wistia-caption-quality-gate.json")
+    check_ids = {check["id"] for check in template["checks"]}
+    assert {"platform-format", "valid-time-order", "utf8-text", "human-review"} <= check_ids
+    assert "never logs in" in template["checks"][-1]["failure"]

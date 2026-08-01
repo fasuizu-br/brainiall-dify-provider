@@ -93,6 +93,12 @@ to YouTube. Pair it with the
 checks before a human performs the final platform upload. A no-code browser path is
 available at [Preparar SRT para YouTube Studio](https://www.brainiall.com/transcreve/tools/youtube-subtitles-srt).
 
+For Vimeo and Wistia teams, [`vimeo-wistia-caption-routing.json`](examples/transcription/vimeo-wistia-caption-routing.json)
+keeps the media caller-owned and maps the reviewed SRT/WebVTT file to the correct
+platform-specific human upload step. Pair it with
+[`vimeo-wistia-caption-quality-gate.json`](examples/transcription/vimeo-wistia-caption-quality-gate.json).
+These examples do not log in, publish, or claim an affiliation with Vimeo or Wistia.
+
 Support: [support@brainiall.com](mailto:support@brainiall.com)
 
 ## Current limitations

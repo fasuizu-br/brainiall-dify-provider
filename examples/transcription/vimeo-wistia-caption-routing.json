@@ -1,0 +1,27 @@
+{
+  "name": "vimeo-wistia-caption-routing",
+  "version": 1,
+  "purpose": "Provider-neutral routing metadata for teams preparing caller-owned SRT or WebVTT captions for Vimeo or Wistia.",
+  "security": {
+    "callerOwnsMedia": true,
+    "neverCommitSecrets": true,
+    "noPlatformLogin": true,
+    "noAutomaticPublish": true
+  },
+  "input": {
+    "subtitleFile": "caller-owned SRT or WebVTT",
+    "destination": "vimeo | wistia",
+    "locale": "pt-BR"
+  },
+  "routing": {
+    "vimeo": {
+      "acceptedFormats": ["SRT", "WebVTT"],
+      "finalStep": "Human uploads the reviewed file in Vimeo's caption settings."
+    },
+    "wistia": {
+      "acceptedFormats": ["SRT", "WebVTT"],
+      "finalStep": "Human uploads the reviewed file in Wistia's captions interface or API."
+    }
+  },
+  "nextStep": "Run the quality gate, retain the original file, and let the account owner perform the final upload."
+}

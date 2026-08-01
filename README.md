@@ -75,6 +75,13 @@ tests, caches, local environments, and development scripts cannot enter the `.di
 Source repository:
 [github.com/fasuizu-br/brainiall-dify-provider](https://github.com/fasuizu-br/brainiall-dify-provider)
 
+## Community integration examples
+
+The [`examples/`](examples/) directory includes an n8n HTTP template for caller-owned
+binary audio. It is a community example only: it is not an n8n partnership, it embeds no
+credential, and it does not claim that the template is production-ready for every n8n
+version.
+
 Support: [support@brainiall.com](mailto:support@brainiall.com)
 
 ## Current limitations

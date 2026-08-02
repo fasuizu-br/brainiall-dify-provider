@@ -1,0 +1,104 @@
+{
+  "name": "Transcreve BR - PT-BR speech-to-text webhook",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "transcreve-ptbr",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "transcreve-webhook",
+      "name": "Receive authorized audio",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 300],
+      "webhookId": "transcreve-ptbr"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.brainiall.com/v1/whisper/transcribe",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.BRAINIALL_API_KEY}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "audio",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "language",
+              "value": "pt"
+            },
+            {
+              "name": "diarize",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "transcreve-http",
+      "name": "Transcreve BR",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [520, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{$json}}",
+        "options": {}
+      },
+      "id": "transcreve-response",
+      "name": "Return transcript",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [780, 300]
+    }
+  ],
+  "connections": {
+    "Receive authorized audio": {
+      "main": [
+        [
+          {
+            "node": "Transcreve BR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcreve BR": {
+      "main": [
+        [
+          {
+            "node": "Return transcript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "c78-n8n-transcreve-ptbr",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

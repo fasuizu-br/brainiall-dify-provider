@@ -78,9 +78,12 @@ Source repository:
 ## Community integration examples
 
 The [`examples/`](examples/) directory includes an n8n HTTP template for caller-owned
-binary audio. It is a community example only: it is not an n8n partnership, it embeds no
-credential, and it does not claim that the template is production-ready for every n8n
-version.
+binary audio. Start with [`examples/n8n/README.md`](examples/n8n/README.md) and
+[`examples/n8n/transcreve-ptbr-webhook.json`](examples/n8n/transcreve-ptbr-webhook.json).
+It is a community example only: it is not an n8n partnership, it embeds no credential,
+and it does not claim that the template is production-ready for every n8n version.
+For the bounded buyer-intent route, see
+[Transcreve BR + n8n](https://www.brainiall.com/transcreve/integracoes/n8n-transcreve-ptbr-webhook).
 
 ## YouTube subtitle workflow templates
 
